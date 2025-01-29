@@ -31,7 +31,7 @@ public class ShopperController {
 
     //use post when you want to add new resources to your system, like adding a new shopper
     @PostMapping
-    public void registerNewStudent(@RequestBody Shopper shopper) {
+    public void registerNewShopper(@RequestBody Shopper shopper) {
         //we take request body and put in into a new shopper
         //this leads to the service layer
         shopperService.addNewShopper(shopper);

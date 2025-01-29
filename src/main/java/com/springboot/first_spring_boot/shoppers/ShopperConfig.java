@@ -17,7 +17,6 @@ public class ShopperConfig {
             Shopper john = new Shopper("john@email.com", "john", LocalDate.of(2000, Month.JANUARY, 1));
             Shopper jane = new Shopper("jane@email.com", "jane", LocalDate.of(2010, Month.JULY, 10));
 
-            //getting error when saving to databse
             repository.saveAll(List.of(john, jane));
         };
     }

@@ -1,6 +1,7 @@
 package com.springboot.first_spring_boot.shoppers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
@@ -24,6 +25,18 @@ public class ShopperService {
     }
 
     public void addNewShopper(Shopper shopper) {
+        Optional<Shopper> shopperByEmail = shopperRepository.findShopperByEmail(shopper.getEmail());
+
+        //checks if email is already taken by user
+        if(shopperByEmail.isPresent()) {
+            //should eventually make custom exception
+            throw new IllegalStateException("Email exists");
+        }
+
+        //check if email is valid
+
+        //save new shopper
+        shopperRepository.save(shopper);
         System.out.println(shopper);
 
     }
