@@ -1,10 +1,12 @@
 package com.springboot.first_spring_boot.shoppers;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 
 
 //This annotation specifies that this class is a service class
@@ -46,10 +48,37 @@ public class ShopperService {
         
         boolean exists = shopperRepository.existsById(shopperId);
         if(!exists) {
-            throw new IllegalStateException("Student with id " + shopperId + " does not exist");
+            throw new IllegalStateException("Shopper with id " + shopperId + " does not exist");
         }
 
         shopperRepository.deleteById(shopperId);
     }
+
+    //transactional uses setters we get to see if we can update the resource
+    @Transactional
+    public void updateShopper(Long shopperId, String username, String email) {
+        //Verify if shopper exists
+        Shopper shopper = shopperRepository.findById(shopperId)
+            .orElseThrow(() -> new IllegalStateException("Shopper with id " + shopperId + " does not exist"));
+
+        //Check if username is valid then updates
+        if(username != null && username.length() > 0 && !Objects.equals(shopper.getUsername(), username)) {
+            shopper.setUsername(username);
+        }
+
+        //Check if email is valid then updates
+        if(email != null && email.length() > 0 && !Objects.equals(shopper.getEmail(), email)) {
+            //Check if email is already taken
+            Optional<Shopper> shopperOptional = shopperRepository.findShopperByEmail(email);
+            if(shopperOptional.isPresent()) {
+                throw new IllegalStateException("Email is taken");
+            }
+
+            //If not, update
+            shopper.setEmail(email);
+        }
+    }
+
+    
     
 }

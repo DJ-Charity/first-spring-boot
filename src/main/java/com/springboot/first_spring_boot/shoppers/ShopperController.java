@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/first")
@@ -39,9 +43,18 @@ public class ShopperController {
         shopperService.addNewShopper(shopper);
     }
 
+    //use delete to delete resources from your system, like deleting a shopper(by id)
     @DeleteMapping(path = "{shopperId}")
     public void deleteShopper(@PathVariable("shopperId") Long shopperId) {
         shopperService.deleteShopper(shopperId);
+    }
+
+    //put is used to update resources in your system
+    @PutMapping(path="{shopperId}")
+    public void updateShopper(@PathVariable("shopperId") Long shopperId, @RequestParam(required = false) String username, @RequestParam(required = false)String email){
+        //name and email are not required for this function(RequestParam)
+        shopperService.updateShopper(shopperId, username, email);
+
     }
     
 }
