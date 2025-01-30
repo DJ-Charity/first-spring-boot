@@ -3,7 +3,9 @@ package com.springboot.first_spring_boot.shoppers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,11 @@ public class ShopperController {
         //we take request body and put in into a new shopper
         //this leads to the service layer
         shopperService.addNewShopper(shopper);
+    }
+
+    @DeleteMapping(path = "{shopperId}")
+    public void deleteShopper(@PathVariable("shopperId") Long shopperId) {
+        shopperService.deleteShopper(shopperId);
     }
     
 }

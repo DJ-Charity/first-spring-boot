@@ -1,9 +1,3 @@
 ###
-POST http://localhost:8080/first
+DELETE http://localhost:8080/first/5
 Content-Type: application/json
-
-{
-    "username": "James",
-    "email": "james@email.com",
-    "dob": "1990-12-23"
-}

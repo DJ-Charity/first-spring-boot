@@ -40,5 +40,16 @@ public class ShopperService {
         System.out.println(shopper);
 
     }
+
+
+    public void deleteShopper(Long shopperId) {
+        
+        boolean exists = shopperRepository.existsById(shopperId);
+        if(!exists) {
+            throw new IllegalStateException("Student with id " + shopperId + " does not exist");
+        }
+
+        shopperRepository.deleteById(shopperId);
+    }
     
 }

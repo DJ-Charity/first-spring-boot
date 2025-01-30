@@ -20,7 +20,7 @@ public class Shopper {
         strategy = GenerationType.SEQUENCE,
         generator = "shopper_sequence"
     )
-    int id;
+    Long id;
 
     //remember to verify email
     String email;
@@ -37,17 +37,17 @@ public class Shopper {
         this.dob=dob;
     }
 
-    public Shopper(int id, String email, String username, LocalDate dob) {
+    public Shopper(Long id, String email, String username, LocalDate dob) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.dob=dob;
     }
     
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getEmail() {
