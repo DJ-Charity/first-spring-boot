@@ -1,3 +1,3 @@
 ###
-PUT http://localhost:8080/first/45?username=ChangeName&email=changeddd@email.com
-Content-Type: application/json
+GET http://localhost:8080/api/v1/demo-controller
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW1wbGVAY29tIiwiaWF0IjoxNzM5MjI3NTcyLCJleHAiOjE3MzkyMjc2MzJ9.njweFZ6JKKtIA9bRx8nsEW8JDRwcQTkS_8RSlcnsvqY

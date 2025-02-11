@@ -56,14 +56,14 @@ public class ShopperService {
 
     //transactional uses setters we get to see if we can update the resource
     @Transactional
-    public void updateShopper(Long shopperId, String username, String email) {
+    public void updateShopper(Long shopperId, String firstname, String email) {
         //Verify if shopper exists
         Shopper shopper = shopperRepository.findById(shopperId)
             .orElseThrow(() -> new IllegalStateException("Shopper with id " + shopperId + " does not exist"));
 
-        //Check if username is valid then updates
-        if(username != null && username.length() > 0 && !Objects.equals(shopper.getUsername(), username)) {
-            shopper.setUsername(username);
+        //Check if firstname is valid then updates
+        if(firstname != null && firstname.length() > 0 && !Objects.equals(shopper.getFirstname(), firstname)) {
+            shopper.setFirstname(firstname);
         }
 
         //Check if email is valid then updates

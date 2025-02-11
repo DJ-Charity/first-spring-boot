@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.transaction.Transactional;
-
 @RestController
-@RequestMapping("/first")
+@RequestMapping("/api/v1/shoppers")
 public class ShopperController {
     //Controller is API layer and communicates to service layer
 
@@ -51,9 +49,9 @@ public class ShopperController {
 
     //put is used to update resources in your system
     @PutMapping(path="{shopperId}")
-    public void updateShopper(@PathVariable("shopperId") Long shopperId, @RequestParam(required = false) String username, @RequestParam(required = false)String email){
+    public void updateShopper(@PathVariable("shopperId") Long shopperId, @RequestParam(required = false) String firstname, @RequestParam(required = false)String email){
         //name and email are not required for this function(RequestParam)
-        shopperService.updateShopper(shopperId, username, email);
+        shopperService.updateShopper(shopperId, firstname, email);
 
     }
     

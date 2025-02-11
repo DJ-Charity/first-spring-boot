@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-class App extends Component {
-  state = {
-    shoppers: []
-  };
+import { useState } from 'react';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import { BrowserRouter, Routes, Route } from "react-router";
 
-  async componentDidMount() {
-    const response = await fetch('/first');
-    const body = await response.json();
-    this.setState({shoppers: body});
+//Make sure to run SpringBoot application beforehand
+function App() {
+
+  //This will store the token in memory that authorizes the shopper
+  const [token, setToken] = useState();
+
+  //If token isn't set, then the user should go to log in page by default
+  if(!token) {
+    return <Login setToken={setToken} />
   }
 
-  render() {
-    const {shoppers} = this.state;
     return (
-        <div className="App">
-          <header className="App-header">
-            <div className="App-intro">
-              <h2>Shoppers</h2>
-              {shoppers.map(shoppers =>
-                  <div key={shoppers.id}>
-                    {shoppers.username} ({shoppers.email})
-                  </div>
-              )}
-            </div>
-          </header>
-        </div>
+       //There should be a homepage for login
+       //Make a component that at least displays email, password, and button
+       <BrowserRouter>
+          <div>
+            <Routes>
+              <Route path="/" element={<Login />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+            </Routes>
+          </div>
+       </BrowserRouter>
+       
     );
-  }
+  
 }
 export default App;
