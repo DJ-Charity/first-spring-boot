@@ -7,14 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router";
 //Make sure to run SpringBoot application beforehand
 function App() {
 
-  //This will store the token in memory that authorizes the shopper
-  const [token, setToken] = useState();
-
-  //If token isn't set, then the user should go to log in page by default
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
-
     return (
        //There should be a homepage for login
        //Make a component that at least displays email, password, and button
