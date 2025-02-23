@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { useState } from 'react';
+import React from 'react';
 import Login from './components/Login';
+import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import { BrowserRouter, Routes, Route } from "react-router";
 
@@ -14,6 +14,7 @@ function App() {
           <div>
             <Routes>
               <Route path="/" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
             </Routes>
           </div>

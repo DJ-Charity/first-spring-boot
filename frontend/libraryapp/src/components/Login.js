@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate  } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
+import "../styles/Login.css";
+/* TODO:
+    -Log in is done, but I need to do Register too
+    -Styling is tbd
+    */
 //This is the log in for Shoppers or Administrators to log in
-const Login = ( {setToken} ) => {
+const Login = () => {
     
     //sets up what variables are being used
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    const [invalidLoginError, setInvalidLoginError] = useState(false);
     
 
     //whenever a field/name is changed, update its value
@@ -30,48 +36,55 @@ const Login = ( {setToken} ) => {
             data: {
                 email,
                 password,
-            }
+            },
+            withCredentials: true,
             })
             .then((response) => {
                 //get the token from the response
                 console.log("It's good:", response);
                 localStorage.setItem('token', response.data.token); 
-                navigate('/dashboard');     //TODO: now need to somehow go to dashboard      
+                navigate('/dashboard');        
             })
             .catch(error => {
                 //catch any errors so we can properly display to user
-                //console.log(error)
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log('Error data:', error.response.data);
-                    console.log('Error status:', error.response.status);
-                    console.log('Error headers:', error.response.headers);
-                  } else if (error.request) {
-                    // The request was made but no response was received
-                    console.log('Error request:', error.request);
-                  } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error message:', error.message);
-                  }
-                  console.log('Error config:', error.config);
-                
+                console.log(error);
+                setInvalidLoginError(true);                          
             }); 
-
     }
     
-        return( 
-            <div>
-                <h1>Login</h1>
-                    <div><input type ="email" placeholder="Enter Email" value={email} name="email" onChange={handleChange}/></div>
-
-                    <div><input type ="password" placeholder="Enter Password" value={password} name="password" onChange={handleChange}/></div>
-
-                    <div><button type="submit" onClick={login}>Login</button></div>      
-            </div>
-        );
-    
     //return will show the initial login page
+    return( 
+        <div>
+            <h1 className="logoTitle">Borealis Bookstore</h1>
+            <div className="loginForm">
+                <h2 className="loginForm__title">Log In</h2>
+                    <div className="containers">         
+                        <label className="fieldNames">
+                            Email:&nbsp;
+                            <input className="fields" type ="email" value={email} name="email" onChange={handleChange}/>
+                        </label>   
+                    </div>
+
+                    <div className="containers">
+                        <label className="fieldNames">
+                            Password:&nbsp;
+                            <input className="fields" type ="password" value={password} name="password" onChange={handleChange}/>
+                        </label>
+                    </div>
+
+                    <div><button className="button" type="submit" onClick={login}>Login</button></div> 
+                    {invalidLoginError && <p className="error">Invalid email or password. Please try again.</p>} 
+                    
+                    <p className="registerLink">If you do not have an account, <Link to="/register">Register now</Link></p> 
+            </div>
+
+            <div className="footer">
+                <h2>GitHub Project by <Link to="https://github.com/DJ-Charity/first-spring-boot">DJ-Charity</Link></h2>
+            </div>         
+        </div>
+    );
+    
+    
     
 }
 export default Login;

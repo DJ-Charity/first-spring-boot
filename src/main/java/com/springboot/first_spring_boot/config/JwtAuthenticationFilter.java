@@ -48,7 +48,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
             //we use jwt service class to extract username
             username = jwtService.extractUsername(jwt);
 
-            //TODO 1.13.50 for amigos jwt video
             //check is username is already authenticated
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 //if authentication is null then user in not connected

@@ -44,7 +44,7 @@ public class JwtService {
     //Token is generated with some extra claims, username, the time it was issued, and the time it will expire
     //it will then get signed with our key using the signature algorithm
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis()+1000*60)).signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
+        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis()+(1000*60)*60)).signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
         //compact generates the token
     }
 

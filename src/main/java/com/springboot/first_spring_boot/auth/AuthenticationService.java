@@ -1,9 +1,10 @@
 package com.springboot.first_spring_boot.auth;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import com.springboot.first_spring_boot.shoppers.Role;
 import com.springboot.first_spring_boot.shoppers.Shopper;
 import com.springboot.first_spring_boot.shoppers.ShopperRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 //service is responsible for registration and authorization implementation
@@ -25,7 +27,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     
     //create new shopper in database and return generated token
-    public AuthenticationResponse register(RegisterRequest request) {
+    public ResponseEntity<String> register(RegisterRequest request, HttpServletResponse response) {
         var shopper = Shopper.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
@@ -38,12 +40,24 @@ public class AuthenticationService {
         repository.save(shopper);
 
         var jwtToken = jwtService.generateToken(shopper);
-        return AuthenticationResponse.builder()
-            .token(jwtToken)
-            .build();
+        //set token in a HttpOnly cookie
+        ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
+                    .httpOnly(false)
+                    .secure(true)
+                    .sameSite("None")
+                    .path("/")
+                    .maxAge(3600)
+                    .build();
+        /*return AuthenticationResponse.builder()
+            .cookie(cookie)
+            .build();*/
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body("Cookie set successfully");
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public ResponseEntity<String> authenticate(AuthenticationRequest request, HttpServletResponse response) {
        
         //authentication manager already has a authenticate method we can use
         authenticationManager.authenticate(
@@ -55,9 +69,25 @@ public class AuthenticationService {
 
         //generate token with authorized user and return response with it
         var jwtToken = jwtService.generateToken(shopper);
-        return AuthenticationResponse.builder()
-            .token(jwtToken)
+
+        //set token in a HttpOnly cookie
+        ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
+                    .httpOnly(false)
+                    .secure(true) 
+                    .sameSite("None")
+                    .path("/")
+                    .maxAge(3600)
+                    .build();
+        
+        /*AuthenticationResponse authResponse = AuthenticationResponse.builder()
+            .cookie(cookie)
             .build();
+        return authResponse;*/
+        //Set the cookie in the response headers
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body("Cookie set successfully");
     }
     
 }

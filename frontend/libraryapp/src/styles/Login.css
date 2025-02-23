@@ -1,0 +1,86 @@
+body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(#7fffd4, #9f08f1);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.logoTitle {
+    text-align: center;
+    font-family: Helvetica;
+    font-style: italic;
+    font-size: 3rem;
+    -webkit-text-fill-color: #8017e9;
+    margin: 1rem auto;
+}
+
+.loginForm {
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-color: white;
+    border-radius: 1rem;
+    background-color: white;    
+    width: fit-content; 
+    margin: 0 auto;
+    
+}
+
+.loginForm__title {
+    -webkit-text-fill-color: #8017e9;
+    font-size: 2rem;
+    margin-left: 0.5rem;
+}
+
+.containers {
+    padding: 0.5rem;
+}
+
+.fieldNames {
+    font-size: 1.2rem;
+    -webkit-text-fill-color: #8017e9;
+    justify-content: left;
+}
+
+.fields {
+    padding: 0.4rem;
+    -webkit-text-fill-color: black;
+    border-radius: 0.5rem;
+}
+
+.registerLink {
+    -webkit-text-fill-color: #8017e9;
+    font-size: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.button {
+    background-color: #8f63bc;
+    -webkit-text-fill-color: white;
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+}
+.button:hover {
+    background-color: #673797;
+    font-size: 1rem;
+}
+
+.error {
+    -webkit-text-fill-color: #e4035d;
+    text-align: center;
+}
+
+.footer {
+    -webkit-text-fill-color: #2082A6;
+    background-color: #7fffd4;
+    font-size: 1rem;
+    position: absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
