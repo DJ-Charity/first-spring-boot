@@ -38,8 +38,9 @@ public class Shopper implements UserDetails{
       )
       Long id;
   
-      //remember to verify email
+      @Column(unique=true)
       private String email;
+      
       private String firstname;
       private String lastname;
       private String password;

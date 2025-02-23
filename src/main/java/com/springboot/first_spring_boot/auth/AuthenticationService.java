@@ -1,8 +1,11 @@
 package com.springboot.first_spring_boot.auth;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +40,15 @@ public class AuthenticationService {
         .role(Role.USER)
         .build();
 
-        repository.save(shopper);
+        try {
+            repository.save(shopper);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.badRequest()
+                .body("Email is already in use");
+        }
+        /* how do i make it fail to save, if email exists in database
+        -the response would then have to send a fail error
+        */
 
         var jwtToken = jwtService.generateToken(shopper);
         //set token in a HttpOnly cookie

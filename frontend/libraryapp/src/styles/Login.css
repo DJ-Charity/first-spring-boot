@@ -6,7 +6,7 @@ body {
     background-attachment: fixed;
 }
 
-.logoTitle {
+.logoTitle { 
     text-align: center;
     font-family: Helvetica;
     font-style: italic;
@@ -30,6 +30,7 @@ body {
 .loginForm__title {
     -webkit-text-fill-color: #8017e9;
     font-size: 2rem;
+    font-family: Helvetica;
     margin-left: 0.5rem;
 }
 
@@ -46,6 +47,7 @@ body {
 .fields {
     padding: 0.4rem;
     -webkit-text-fill-color: black;
+    font-family: Helvetica;
     border-radius: 0.5rem;
 }
 
@@ -79,6 +81,7 @@ body {
     -webkit-text-fill-color: #2082A6;
     background-color: #7fffd4;
     font-size: 1rem;
+    font-family: Helvetica;
     position: absolute;
     left:0;
     bottom:0;

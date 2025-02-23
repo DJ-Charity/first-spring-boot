@@ -17,6 +17,8 @@ const Register = () => {
     const [passwordRuleError, setPasswordRuleError] = useState(false);
     const [passwordLengthError, setPasswordLengthError] = useState(false);
     const [emailRequiredError, setEmailRequiredError] = useState(false);
+    const [emailExistsError, setEmailExistsError] = useState(false);
+
     const navigate = useNavigate();
     
 
@@ -42,9 +44,11 @@ const Register = () => {
     const register = () => {
         //Reset errors
         setEmailRequiredError(false);
+        setEmailExistsError(false);
         setPasswordError(false);
         setPasswordRuleError(false);
         setPasswordLengthError(false);
+        //TODO: Need to add error for when email already exists in database
 
         //input validation
         if(!password.length || !passwordCopy.length || password!==passwordCopy){
@@ -62,7 +66,7 @@ const Register = () => {
         } else if(!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || !email.length) {
             //email must be in correct format
             setEmailRequiredError(true);
-            
+
         } else {
             //all fields meet requirements
             axios(`http://localhost:8080/api/v1/auth/register`, {
@@ -86,6 +90,10 @@ const Register = () => {
                 //catch any errors so we can properly display to user
                 //we need to catch an error for when email already exists
                 console.log(error.response);
+                if(error.response.data === "Email is already in use") {
+                    setEmailExistsError(true);
+                }
+                
                 
             });
         }
@@ -111,6 +119,7 @@ const Register = () => {
                     {/* Error messages */}
                     {passwordError && <p className="error">Password doesn't match or the field is empty</p>}
                     {emailRequiredError && <p className="error">Email is invalid or the field is empty</p>}
+                    {emailExistsError && <p className="error">Email is already in use</p>}
                     {passwordRuleError && <p className="error">Password must contain an undercase letter, and uppercase letter, a number, and a special character</p>}
                     {passwordLengthError && <p className="error">Password must be between 8 and 16 characters</p>}
 

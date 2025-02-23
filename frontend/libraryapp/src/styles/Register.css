@@ -21,6 +21,7 @@
 .registerForm__title {
     -webkit-text-fill-color: #8017e9;
     font-size: 2rem;
+    font-family: Helvetica;
     padding-left: 2rem;
     padding-right: 2rem;
 }
@@ -28,6 +29,7 @@
 .fields {
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
+    font-family: Helvetica;
 }
 
 .button {
@@ -51,12 +53,15 @@
 .error {
     -webkit-text-fill-color: #e4035d;
     text-align: center;
+    font-family: Helvetica;
+    font-size: 1.2rem;
 }
 
 .footer {
     -webkit-text-fill-color: #2082A6;
     background-color: #7fffd4;
     font-size: 1rem;
+    font-family: Helvetica;
     position: absolute;
     left:0;
     bottom:0;

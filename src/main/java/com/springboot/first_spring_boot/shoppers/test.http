@@ -1,8 +1,11 @@
 ###
-POST http://localhost:8080/api/v1/auth/authenticate
+POST http://localhost:8080/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "email": "first@com",
-    "password": "first"
+    "firstname": "fname",
+    "lastname": "lname",
+    "email": "first@email.com",
+    "password": "second",
+    "dob": "2020-07-07"
 }
