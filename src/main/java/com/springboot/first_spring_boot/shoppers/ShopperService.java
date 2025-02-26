@@ -3,10 +3,15 @@ package com.springboot.first_spring_boot.shoppers;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.springboot.first_spring_boot.books.Books;
+import com.springboot.first_spring_boot.books.ShopperBooks;
 
 
 //This annotation specifies that this class is a service class
@@ -20,9 +25,18 @@ public class ShopperService {
     public ShopperService(ShopperRepository shopperRepository) {
         this.shopperRepository = shopperRepository;
     }
+
+    public ResponseEntity<String> printShopperBooks(String shopperEmail) {
+        
+        Shopper shopper = shopperRepository.findByEmail(shopperEmail);
+        Set<ShopperBooks> boughtBooks = shopper.getShopperBooks();
+        //TODO: Gp through this set to get the isbns-> the isbns are used to get every book in Books table -> after that list is collected we can return it as the body of the response
+        //I am a bit confused though why we cant just use a regular set of books
+
+        return null;
+    }
     
-    
-    public List<Shopper> printShopper() {
+   /*  public List<Shopper> printShopper() {
         return shopperRepository.findAll();
     }
 
@@ -40,9 +54,7 @@ public class ShopperService {
         //save new shopper
         shopperRepository.save(shopper);
         System.out.println(shopper);
-
     }
-
 
     public void deleteShopper(Long shopperId) {
         
@@ -77,8 +89,6 @@ public class ShopperService {
             //If not, update
             shopper.setEmail(email);
         }
-    }
+    }*/
 
-    
-    
 }

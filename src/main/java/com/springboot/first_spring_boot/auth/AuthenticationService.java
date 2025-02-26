@@ -46,9 +46,7 @@ public class AuthenticationService {
             return ResponseEntity.badRequest()
                 .body("Email is already in use");
         }
-        /* how do i make it fail to save, if email exists in database
-        -the response would then have to send a fail error
-        */
+        
 
         var jwtToken = jwtService.generateToken(shopper);
         //set token in a HttpOnly cookie

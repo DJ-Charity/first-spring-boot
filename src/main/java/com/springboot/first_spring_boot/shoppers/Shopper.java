@@ -3,12 +3,17 @@ package com.springboot.first_spring_boot.shoppers;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.springboot.first_spring_boot.books.ShopperBooks;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -51,6 +56,10 @@ public class Shopper implements UserDetails{
 
       @Enumerated(EnumType.STRING)
       private Role role;
+
+      @Builder.Default
+      @OneToMany(mappedBy = "shopper")
+      private Set<ShopperBooks> shopperBooks = new HashSet<>();
   
       public Shopper(String email, String firstname, String password, LocalDate dob) {
           this.email = email;
@@ -128,6 +137,14 @@ public class Shopper implements UserDetails{
       public void setRole(Role role) {
         this.role = role;
       }
+
+      public Set<ShopperBooks> getBooks() {
+        return shopperBooks;
+      }
+      public void setBooks(Set<ShopperBooks> shopperBooks) {
+        this.shopperBooks.addAll(shopperBooks);
+      }
+
   
       @Override
       public String toString() {

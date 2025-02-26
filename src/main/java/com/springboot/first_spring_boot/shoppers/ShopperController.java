@@ -3,6 +3,7 @@ package com.springboot.first_spring_boot.shoppers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +29,18 @@ public class ShopperController {
         this.shopperService = shopperService;
     }
 
+    
+
+    @GetMapping("/boughtbooks")
+    public ResponseEntity<String> printShopperBooks(@RequestBody String shopperEmail) {
+        return shopperService.printShopperBooks(shopperEmail);
+    }
+
+    /* 
     @GetMapping
     public List<Shopper> printShopper() {
         return shopperService.printShopper();
     }
-
     //use post when you want to add new resources to your system, like adding a new shopper
     @PostMapping
     public void registerNewShopper(@RequestBody Shopper shopper) {
@@ -53,6 +61,6 @@ public class ShopperController {
         //name and email are not required for this function(RequestParam)
         shopperService.updateShopper(shopperId, firstname, email);
 
-    }
+    }*/
     
 }

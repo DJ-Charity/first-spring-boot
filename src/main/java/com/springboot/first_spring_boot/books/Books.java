@@ -1,14 +1,24 @@
 package com.springboot.first_spring_boot.books;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Books {
 
     @Id
@@ -19,9 +29,9 @@ public class Books {
     private BigDecimal price;
     private Genre genre;
 
-    
-    public Books() {
-    }
+    @Builder.Default
+    @OneToMany(mappedBy="book")
+    Set<ShopperBooks> shopperBooks = new HashSet<>();
 
     public Books(Long isbn, String title, String author, Genre genre) {
         this.isbn = isbn;
@@ -34,7 +44,7 @@ public class Books {
     public Long getIsbn() {
         return isbn;
     }
-    public void setISBN(Long iSBN) {
+    public void setIsbn(Long iSBN) {
         this.isbn = iSBN;
     }
     public String getTitle() {
@@ -61,6 +71,11 @@ public class Books {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    
-    
+    public Set<ShopperBooks> getShopperBooks() {
+        return shopperBooks;
+    }
+    public void setShopperBooks(Set<ShopperBooks> shopperBooks) {
+        this.shopperBooks = shopperBooks;
+    }
+      
 }
