@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -30,7 +31,7 @@ public class Books {
     private Genre genre;
 
     @Builder.Default
-    @OneToMany(mappedBy="book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     Set<ShopperBooks> shopperBooks = new HashSet<>();
 
     public Books(Long isbn, String title, String author, Genre genre) {

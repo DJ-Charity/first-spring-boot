@@ -1,9 +1,17 @@
 package com.springboot.first_spring_boot.books;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class ShopperBookKey implements Serializable{
+
+    @Column
     private String shopperEmail;
+    @Column
     private Long bookIsbn;
 
     public ShopperBookKey() {

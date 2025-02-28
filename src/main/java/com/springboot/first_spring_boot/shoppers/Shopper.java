@@ -58,7 +58,7 @@ public class Shopper implements UserDetails{
       private Role role;
 
       @Builder.Default
-      @OneToMany(mappedBy = "shopper")
+      @OneToMany(mappedBy = "shopper", cascade = CascadeType.ALL)
       private Set<ShopperBooks> shopperBooks = new HashSet<>();
   
       public Shopper(String email, String firstname, String password, LocalDate dob) {
