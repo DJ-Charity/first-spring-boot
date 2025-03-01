@@ -1,12 +1,8 @@
 package com.springboot.first_spring_boot.shoppers;
 
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.springboot.first_spring_boot.books.Books;
 
 //The repository works with the Shopper class that has an id of type int
 //The repository is the data layer

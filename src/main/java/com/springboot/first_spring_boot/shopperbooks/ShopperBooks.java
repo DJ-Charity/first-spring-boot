@@ -1,14 +1,12 @@
-package com.springboot.first_spring_boot.books;
+package com.springboot.first_spring_boot.shopperbooks;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.springboot.first_spring_boot.books.Books;
 import com.springboot.first_spring_boot.shoppers.Shopper;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;

@@ -1,8 +1,6 @@
-package com.springboot.first_spring_boot.books;
+package com.springboot.first_spring_boot.shopperbooks;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 

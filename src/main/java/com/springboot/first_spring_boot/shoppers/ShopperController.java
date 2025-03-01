@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.springboot.first_spring_boot.books.Books;
+import com.springboot.first_spring_boot.shopperbooks.ShopperBookResponse;
 
 @RestController
 @RequestMapping("/api/v1/shoppers")
@@ -27,13 +27,24 @@ public class ShopperController {
         //we use dependency injection as much as possible
         //so services should be injected into this controller constructor
         this.shopperService = shopperService;
+    } 
+
+    //Returns all the purchased books associated with a shopper's email in a response
+    @GetMapping("/boughtbooks")
+    public ResponseEntity<ShopperBookResponse> printShopperBooks(@RequestBody String shopperEmail) {
+        return ResponseEntity.ok(shopperService.printShopperBooks(shopperEmail));
     }
 
-    
+    //Checks if a shopper can purchase this book then adds it to that shopper's set of purchased books
+    @PutMapping("/purchase")
+    public ResponseEntity<String> purchaseBook(@RequestBody PurchaseRequest request) {
+        return ResponseEntity.ok(shopperService.purchaseBook(request));
+    }
 
-    @GetMapping("/boughtbooks")
-    public ResponseEntity<String> printShopperBooks(@RequestBody String shopperEmail) {
-        return shopperService.printShopperBooks(shopperEmail);
+    //Checks if a shopper can purchase this book then adds it to that shopper's set of purchased books
+    @PostMapping("/allbooks")
+    public ResponseEntity<List<Books>> printAllBooks(@RequestBody String request) {
+        return ResponseEntity.ok(shopperService.printAllBooks(request));
     }
 
     /* 

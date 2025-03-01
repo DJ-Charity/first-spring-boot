@@ -1,6 +1,6 @@
-package com.springboot.first_spring_boot.auth;
+package com.springboot.first_spring_boot.shopperbooks;
 
-import org.springframework.http.ResponseCookie;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-    private ResponseCookie cookie;
-
+public class ShopperBookResponse {
+    Set<ShopperBooks> purchaseBooks;
+    
 }

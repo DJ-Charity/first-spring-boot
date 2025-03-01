@@ -1,17 +1,16 @@
 package com.springboot.first_spring_boot.shoppers;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.Transactional;
-
+import com.springboot.first_spring_boot.books.BookRepository;
 import com.springboot.first_spring_boot.books.Books;
-import com.springboot.first_spring_boot.books.ShopperBooks;
+import com.springboot.first_spring_boot.shopperbooks.ShopperBookResponse;
+import com.springboot.first_spring_boot.shopperbooks.ShopperBooks;
 
 
 //This annotation specifies that this class is a service class
@@ -20,20 +19,36 @@ public class ShopperService {
     //This is the service layer and it communicates to the data access layer...like a database
 
     private ShopperRepository shopperRepository;
+    private BookRepository bookRepository;
 
     @Autowired
-    public ShopperService(ShopperRepository shopperRepository) {
+    public ShopperService(ShopperRepository shopperRepository, BookRepository bookRepository) {
         this.shopperRepository = shopperRepository;
+        this.bookRepository = bookRepository;
     }
 
-    public ResponseEntity<String> printShopperBooks(String shopperEmail) {
+    public ShopperBookResponse printShopperBooks(String shopperEmail) {
         
         Shopper shopper = shopperRepository.findByEmail(shopperEmail);
         Set<ShopperBooks> boughtBooks = shopper.getShopperBooks();
-        //TODO: Gp through this set to get the isbns-> the isbns are used to get every book in Books table -> after that list is collected we can return it as the body of the response
-        //I am a bit confused though why we cant just use a regular set of books
 
-        return null;
+        ShopperBookResponse responseEntity = ShopperBookResponse.builder().purchaseBooks(boughtBooks).build();
+
+        return responseEntity;
+    }
+
+    public String purchaseBook(PurchaseRequest request) {
+        Shopper shopper = shopperRepository.findByEmail(request.getEmail());
+        Optional<Books> book = bookRepository.findById(request.getIsbn());
+
+        shopper.getShopperBooks().add(new ShopperBooks(shopper, book.get(), LocalDate.now()));
+
+        return "Book purchased";
+
+    }
+
+    public List<Books> printAllBooks(String request) {
+        return bookRepository.findAll();
     }
     
    /*  public List<Shopper> printShopper() {

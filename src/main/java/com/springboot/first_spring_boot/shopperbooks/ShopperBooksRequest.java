@@ -1,4 +1,4 @@
-package com.springboot.first_spring_boot.books;
+package com.springboot.first_spring_boot.shopperbooks;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
