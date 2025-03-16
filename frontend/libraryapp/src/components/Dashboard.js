@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import axios from "axios";
+import { useNavigate, Link } from 'react-router-dom';
+import "../styles/Dashboard.css";
+
 
 /* TODO:
     -Need a new database table for books(isbn key int, name string, author string, genre enum)
@@ -10,7 +13,7 @@ import axios from "axios";
 */
 const Dashboard = () => {
     const [user, setUser] = useState('');
-    const [purchases, setPurchases] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
       //Extract the token from the cookie
@@ -26,46 +29,26 @@ const Dashboard = () => {
           
         } catch (error) {
           console.error('Invalid token:', error);
+          
         }
+      } else {
+        navigate('/');
       }
-
-
-      //START: The code will be moved to Store page to show all books that can be purchased, the books are store is useState purchase
-      axios(`http://localhost:8080/api/v1/shoppers/allbooks`, {
-        method: "POST", 
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: {
-            user,
-        },
-        withCredentials: true,
-        })
-        .then((response) => {
-            //get the token from the response
-            console.log("It's good:", response);
-            setPurchases(response.data);       
-        })
-        .catch(error => {
-            //catch any errors so we can properly display to user
-            console.log(error);                         
-        }); 
 
     }, []);
     //END
       
     return(
       <div>
-        <h1>Dashboard {user}</h1>
-
-        {/*TODO: This div will be moved to Store page to show all purchasable books*/}
-        <div>
-          <ul>
-            {purchases.map((purchase) => (
-              <li>{purchase.title}</li>
-            ))}
-          </ul>
+        <div className='header'>
+            <div className='logo'>Borealis BookStore</div>
+            <div><Link to="/store">Store</Link></div>
+            <div><Link to="/account">Account</Link></div>
+            <div>Log Out</div>
         </div>
+
+        <h1>{user}'s Books</h1>
+
       </div>
         
             

@@ -6,7 +6,7 @@ body {
     background-attachment: fixed;
 }
 
-.logoTitle { 
+.login_logoTitle { 
     text-align: center;
     font-family: Helvetica;
     font-style: italic;
@@ -34,7 +34,7 @@ body {
     margin-left: 0.5rem;
 }
 
-.containers {
+.Login_containers {
     padding: 0.5rem;
 }
 
@@ -42,6 +42,7 @@ body {
     font-size: 1.2rem;
     -webkit-text-fill-color: #8017e9;
     justify-content: left;
+    margin-left: 0.5rem;
 }
 
 .fields {
@@ -58,7 +59,7 @@ body {
     text-align: center;
 }
 
-.button {
+.Login_button {
     background-color: #8f63bc;
     -webkit-text-fill-color: white;
     font-size: 1rem;
@@ -72,9 +73,10 @@ body {
     font-size: 1rem;
 }
 
-.error {
+.login_error {
     -webkit-text-fill-color: #e4035d;
     text-align: center;
+    font-size: 0.9rem;
 }
 
 .footer {

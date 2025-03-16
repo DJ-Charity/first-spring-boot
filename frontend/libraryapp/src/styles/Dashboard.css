@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #58e0b2;
+    font-family: Helvetica;
+    font-size: 1.5rem;
+}
+
+.logo {
+    font-family: Helvetica;
+    font-size: 1.5rem;
+    -webkit-text-fill-color: white;
+    font-style: oblique;
+}

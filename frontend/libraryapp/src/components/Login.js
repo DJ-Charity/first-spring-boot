@@ -55,17 +55,17 @@ const Login = () => {
     //return will show the initial login page
     return( 
         <div>
-            <h1 className="logoTitle">Borealis Bookstore</h1>
+            <h1 className="login_logoTitle">Borealis Bookstore</h1>
             <div className="loginForm">
                 <h2 className="loginForm__title">Log In</h2>
-                    <div className="containers">         
+                    <div className="login_containers">         
                         <label className="fieldNames">
                             Email:&nbsp;
                             <input className="fields" type ="email" value={email} name="email" onChange={handleChange}/>
                         </label>   
                     </div>
 
-                    <div className="containers">
+                    <div className="login_containers">
                         <label className="fieldNames">
                             Password:&nbsp;
                             <input className="fields" type ="password" value={password} name="password" onChange={handleChange}/>
@@ -73,7 +73,7 @@ const Login = () => {
                     </div>
 
                     <div><button className="button" type="submit" onClick={login}>Login</button></div> 
-                    {invalidLoginError && <p className="error">Invalid email or password. Please try again.</p>} 
+                    {invalidLoginError && <p className="login_error">Invalid email or password. Please try again.</p>} 
                     
                     <p className="registerLink">If you do not have an account, <Link to="/register">Register now</Link></p> 
             </div>
