@@ -31,25 +31,51 @@ body {
     -webkit-text-fill-color: #8017e9;
     font-size: 2rem;
     font-family: Helvetica;
-    margin-left: 0.5rem;
+    text-align: center;
 }
 
 .Login_containers {
     padding: 0.5rem;
 }
 
-.fieldNames {
-    font-size: 1.2rem;
-    -webkit-text-fill-color: #8017e9;
-    justify-content: left;
-    margin-left: 0.5rem;
+.Login_table {
+    border-spacing: 1rem
 }
 
-.fields {
+.Login_input {
     padding: 0.4rem;
-    -webkit-text-fill-color: black;
+    -webkit-text-fill-color: #1f0659;
     font-family: Helvetica;
     border-radius: 0.5rem;
+    appearance: none;
+    border-color: #3c139b;
+    
+}
+
+.Login_input.dirty + .loginPlaceholder,
+.Login_input:focus + .loginPlaceholder {
+    top: 0rem;
+    font-size: 0.7rem;
+    background: white;
+}
+
+.Login_label {
+    position: relative;
+    font-size: 1rem;
+    padding-top: 0.5rem;
+}
+
+.Login_label .loginPlaceholder {
+    -webkit-text-fill-color: #26086c;
+    font-family: Helvetica;
+    position: absolute;
+    left: 0.5rem;
+    top: 0.7rem;
+    transition: 
+        top 0.3s ease,
+        font-size 0.3s ease,
+        border-color 0.3s ease;
+
 }
 
 .registerLink {
@@ -57,16 +83,17 @@ body {
     font-size: 1rem;
     padding: 1rem;
     text-align: center;
+    margin-bottom: 3rem;
 }
 
 .Login_button {
-    background-color: #8f63bc;
+    background-color: #8017e9;
     -webkit-text-fill-color: white;
     font-size: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0.5rem;
-    margin-left: 0.5rem;
+    
 }
 .button:hover {
     background-color: #673797;

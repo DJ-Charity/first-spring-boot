@@ -27,6 +27,18 @@ const Login = () => {
         }
     }
 
+    const inputs = document.querySelectorAll('input');
+
+inputs.forEach(el => {
+  el.addEventListener('blur', e => {
+    if(e.target.value) {
+      e.target.classList.add('dirty');
+    } else {
+      e.target.classList.remove('dirty');
+    }
+  })
+})
+
     //handles login
     const login = () => {
         
@@ -57,7 +69,32 @@ const Login = () => {
         <div>
             <h1 className="login_logoTitle">Borealis Bookstore</h1>
             <div className="loginForm">
-                <h2 className="loginForm__title">Log In</h2>
+                <h2 className="loginForm__title">Login</h2>
+                    <table className="Login_table">
+                        <tr>         
+                            <td>
+                                <label className="Login_label">
+                                    <input className="Login_input" type="email" value={email} name="email" onChange={handleChange} required/>
+                                    <span className="loginPlaceholder">Email</span>
+                                </label>
+                                
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label className="Login_label">
+                                    <input className="Login_input" type="password" value={password} name="password" onChange={handleChange}/>
+                                    <span className="loginPlaceholder">Password</span>
+                                </label>
+                            </td>
+                            {/*<td><input className="Login_input" type="password" placeholder="Password" value={password} name="password" onChange={handleChange}/></td>*/}  
+                        </tr>
+                        <tr>
+                            <td><button className="Login_button" type="submit" onClick={login}>Login</button></td>
+                        </tr>
+                    </table>
+                    {/* 
                     <div className="login_containers">         
                         <label className="fieldNames">
                             Email:&nbsp;
@@ -72,7 +109,7 @@ const Login = () => {
                         </label>
                     </div>
 
-                    <div><button className="button" type="submit" onClick={login}>Login</button></div> 
+                    <div><button className="button" type="submit" onClick={login}>Login</button></div> */}
                     {invalidLoginError && <p className="login_error">Invalid email or password. Please try again.</p>} 
                     
                     <p className="registerLink">If you do not have an account, <Link to="/register">Register now</Link></p> 
