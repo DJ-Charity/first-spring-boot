@@ -92,36 +92,76 @@ const Register = () => {
                 console.log(error.response);
                 if(error.response.data === "Email is already in use") {
                     setEmailExistsError(true);
-                }
-                
-                
+                }          
             });
         }
     }
+    
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(el => {
+        el.addEventListener('blur', e => {
+            if(e.target.value) {
+            e.target.classList.add('dirty');
+            } else {
+            e.target.classList.remove('dirty');
+            }
+        })
+    })
 
     return( 
         <div>
             <h1 className="logoTitle">Borealis Bookstore</h1>
             <div className="registerForm">         
 
-                <h2 className="registerForm__title">Register a new account</h2>
-                    <div className="fields"><input type ="text" placeholder="Enter First Name" value={firstname} name="firstname" onChange={handleChange}/></div>
-                    <div className="fields"><input type ="text" placeholder="Enter Last Name" value={lastname} name="lastname" onChange={handleChange}/></div>
-
-                    <div className="fields"><input type ="date" placeholder="Enter Your Date of Birth" value={dob} name="dob" max={moment().format("YYYY-MM-DD")} onChange={handleChange}/></div>
+                <h2 className="registerForm__title">Register Your New Account</h2>
+                <table className="registerForm_table">
+                    <tr><td>
+                            <label className="Register_label">
+                                <input className="Register_input" type ="text" value={firstname} name="firstname" onChange={handleChange}/>
+                                <span className="registerPlaceholder">Enter First Name</span>
+                            </label>
+                    </td></tr>
+                    <tr><td>
+                            <label className="Register_label">
+                                <input className="Register_input" type ="text" value={lastname} name="lastname" onChange={handleChange}/>
+                                <span className="registerPlaceholder">Enter Last Name</span>
+                            </label>
+                    </td></tr>
+                    <tr><td>
+                            <label className="Register_label">
+                                <span className="Register_dobspan">Enter Your Date of Birth</span>
+                                <input className="Register_dobinput" type ="date" value={dob} name="dob" max={moment().format("YYYY-MM-DD")} onChange={handleChange}/>
+                            </label>
+                    </td></tr>
+                    <tr><td>
+                            <label className="Register_label">
+                                <input className="Register_input" type ="email" value={email} name="email" onChange={handleChange}/>
+                                <span className="registerPlaceholder">Enter Your Email</span>
+                            </label>
+                    </td></tr>
+                    <tr><td>
+                            <label className="Register_label">
+                                <input className="Register_input" type ="password" value={password} name="password" onChange={handleChange}/>
+                                <span className="registerPlaceholder">Enter New Password</span>
+                            </label>
+                    </td></tr>
+                    <tr><td>
+                            <label className="Register_label">
+                                <input className="Register_input" type ="password" value={passwordCopy} name="passwordCopy" onChange={handleChange}/>
+                                <span className="registerPlaceholder">Confirm New Password</span>
+                            </label>
+                    </td></tr>
+                    <tr>
+                        <td><button className="button" type="submit" onClick={register}>Register</button></td>
+                    </tr>
+                </table>
                     
-                    <div className="fields"><input type ="email" placeholder="Enter Email" value={email} name="email" onChange={handleChange}/></div>
-
-                    <div className="fields"><input type ="password" placeholder="New Password" value={password} name="password" onChange={handleChange}/></div>
-                    <div className="fields"><input type ="password" placeholder="Confirm Password" value={passwordCopy} name="passwordCopy" onChange={handleChange}/></div>
-
-                    <div><button className="button" type="submit" onClick={register}>Register</button></div> 
-                    {/* Error messages */}
-                    {passwordError && <p className="error">Password doesn't match or the field is empty</p>}
-                    {emailRequiredError && <p className="error">Email is invalid or the field is empty</p>}
-                    {emailExistsError && <p className="error">Email is already in use</p>}
-                    {passwordRuleError && <p className="error">Password must contain an undercase letter, and uppercase letter, a number, and a special character</p>}
-                    {passwordLengthError && <p className="error">Password must be between 8 and 16 characters</p>}
+                {/* Error messages */}
+                {passwordError && <p className="error">Password doesn't match or the field is empty</p>}
+                {emailRequiredError && <p className="error">Email is invalid or the field is empty</p>}
+                {emailExistsError && <p className="error">Email is already in use</p>}
+                {passwordRuleError && <p className="error">Password must contain an undercase letter, and uppercase letter, a number, and a special character</p>}
+                {passwordLengthError && <p className="error">Password must be between 8 and 16 characters</p>}
 
             </div>
             <div className="footer">
